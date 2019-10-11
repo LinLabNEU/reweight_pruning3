@@ -2,7 +2,7 @@
 
 This is the submission for the MicroNet challenge on the CIFAR-100 task. 
 
-This project is based on Pytorch. We do not perform quantization for this model.
+This project is based on Pytorch. We perform quantization for this model.
 
 # Model
 
