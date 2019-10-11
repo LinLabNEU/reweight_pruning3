@@ -2,7 +2,7 @@
 
 This is the submission for the MicroNet challenge on the CIFAR-100 task. 
 
-This project is based on Pytorch. We perform quantization for this model.
+This project is based on Pytorch. We perform quantization for this model. We first introduce the pruning and quantization method for this project. Then we demonstrate how we count the parameters and operations and show the score in the end.
 
 # Model
 
@@ -51,6 +51,16 @@ python testers.py
 ```
 It outputs the test accuracy of the model. It also counts the number of non-zero and zero elements in the parameters. The total number of parameters is XXX. Among them, there are XXXX zero parameters and XXXX non-zero parameters. 
 
+# Count parameters
+
+From the output of the testers file, that is,
+```
+python testers.py
+```
+We can see that the total number of parameters is XXX. Among them, there are XXXX zero parameters and XXXX non-zero parameters. 
+
+Parameter number: XXXXX
+
 # Count operations
 
 We show how we count the operations and the operation number for scoring in the end of this part. 
@@ -76,4 +86,14 @@ operation number: 116.19M
 
 For CIFAR-100, parameter storage and compute requirements will be normalized relative to WideResNet-28-10, which has 36.5M parameters and 10.49B math operations.
 
-So the score is XXX/36.5M + 231.25M/10.49B = XXX.
+So the score is XXX/36.5M + XXX/10.49B = XXX.
+
+
+# Team member
+
+The team name is XXXX.
+
+This is an collaboration of Northeastern University, XXX university and IBM corporation. The team members are listed as follows, 
+-XXXX
+-XXXX
+-XXXX
