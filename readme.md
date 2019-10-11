@@ -9,8 +9,7 @@ This project is based on Pytorch. We perform quantization for this model. We fir
 The model architecture is based on the MobileNet V2. For more details, please refer to the mobilenet_v2.py file and the original paper. The pruned model is saved as cifar100_mobilenetv2.pt. It can achieve 80.15% accuracy satisfying the 80% accuracy requirement.
 
 
-total weights: 3905632, total number of zeros: 3005523, non-zeros: 900109, zero sparsity is: 0.7695\
-only consider conv layers, compression rate is: 4.3391\
+total weights: 3905632, total number of zeros: 3012168, non-zeros: 893464, zero sparsity is: 0.7712\
 
 # Pruning method
 
@@ -40,7 +39,7 @@ To load and verify the model, run:
 ```
 python testers.py
 ```
-It outputs the test accuracy of the model. It also counts the number of non-zero and zero elements in the parameters. The total number of parameters is XXX. Among them, there are XXXX zero parameters and XXXX non-zero parameters. 
+It outputs the test accuracy of the model. It also counts the number of non-zero and zero elements in the parameters. The total number of parameters is 3996704. Among them, there are 3012168 zero parameters and 984536 non-zero parameters. 
 
 # Count parameters
 
@@ -48,11 +47,9 @@ From the output of the testers file, that is,
 ```
 python testers.py
 ```
-We can see that the total number of parameters is XXX. Among them, there are XXXX zero parameters and XXXX non-zero parameters. 
+It outputs the test accuracy of the model. It also counts the number of non-zero and zero elements in the parameters. The total number of parameters is 3996704 (4.0M). Among them, there are 3012168 (3.02M) zero parameters and 984536 (0.98M) non-zero parameters. The number of bitmask is 122051 (0.1221M). So the total parameters for storage is 0.3671M (0.98M / 4 + 0.1221M) since the parameters are all 8bit.
 
-Considering the quantization, the total number of parameters (counted with 32bit base) is XXXX.
-
-Parameter number: XXXXX
+Parameter number: 0.3671M
 
 # Count operations
 
@@ -81,7 +78,7 @@ operation number: XXX
 
 For CIFAR-100, parameter storage and compute requirements will be normalized relative to WideResNet-28-10, which has 36.5M parameters and 10.49B math operations.
 
-So the score is XXX/36.5M + XXX/10.49B = XXX.
+So the score is 0.3671M/36.5M + XXX/10.49B = XXX.
 
 
 # Team member
