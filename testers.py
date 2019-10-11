@@ -53,7 +53,6 @@ def test_irregular_sparsity(model):
 
     total_zeros = 0
     total_nonzeros = 0
-
     for name, weight in model.named_parameters():
         if len(weight.size()) == 4:
             # continue
@@ -67,7 +66,11 @@ def test_irregular_sparsity(model):
             # print("{}, all weights: {}, irregular zeros: {}, irregular sparsity is: {:.4f}".format(name, zeros+non_zeros, zeros, zeros / (zeros + non_zeros)))
             # print(non_zeros+zeros)
     total_nonzeros += 128000
+    #layers 22,25,27,29,31,32,35,37,39,40,44,56,58 quant to 6 bit
+    #layers 1 quant to 9 bit
 
+    print("---------------------------------------------------------------------------")
+    print("eight bit weight number is:{}".format(total_nonzeros))
 
     # fileObject = open('sampleList.txt', 'w')
 
@@ -76,7 +79,7 @@ def test_irregular_sparsity(model):
     # Print model's state_dict
 
     bn_paras = 0
-    print("Mobilenet_V2 Model's state_dict:")
+    #print("Mobilenet_V2 Model's state_dict:")
     for param_tensor in model.state_dict():
         #print(param_tensor, "\t", model.state_dict()[param_tensor].size())
         if model.state_dict()[param_tensor].size() != torch.Size([]):
@@ -84,19 +87,19 @@ def test_irregular_sparsity(model):
             #print(model.state_dict()[param_tensor].size()[0])
     #print('#########################      v2      ############################')
     #print(model)
-    bn_paras = (bn_paras - 200) * 4 /5
+    bn_paras = (bn_paras - 200) * 4 / 5 # 200 is the parameter number of fully connected layers which not cantain BN layers
+    print("eight bit batchnorm parameters number is:{}".format(bn_paras))
 
     print("---------------------------------------------------------------------------")
-    print("total weights: {}, total number of zeros: {}, non-zeros: {}, zero sparsity is: {:.4f}".format(total_zeros + total_nonzeros,
-        total_zeros, total_nonzeros, total_zeros / (total_zeros + total_nonzeros)))
-    print("only consider conv layers, compression rate is: {:.4f}".format(
-        (total_zeros+total_nonzeros) / total_nonzeros))
-    print("total parameters is: {}".format(bn_paras + total_zeros + total_nonzeros))
+    print("total weights(fully connected and conv layers): {}, total number of zeros: {}, non-zeros: {}, zero sparsity is: {:.4f}".format(
+        total_zeros + total_nonzeros, total_zeros, total_nonzeros, total_zeros / (total_zeros + total_nonzeros)))
+    print("total parameters(fully connected, conv layers and their batchnorm layers) is: {}".format(bn_paras + total_zeros + total_nonzeros))
     print("total bitmask number(32bit) is: {}".format(
         (total_zeros+total_nonzeros) / 32))
     print("batchnorm parameters number is: {}".format(bn_paras))
     print("total non-zero parameters is: {}".format(bn_paras + total_nonzeros))
-    print("total parameters for storage is: {}".format((bn_paras + total_nonzeros)/4 + (total_zeros+total_nonzeros) / 32))
+    print("total parameters for storage is: {}".format(
+        (bn_paras + total_nonzeros)/4 + (total_zeros + total_nonzeros) / 32))
     print("===========================================================================\n\n")
 
 
@@ -150,10 +153,10 @@ def main():
     model = dataParallel_converter(model, "./cifar100_mobilenetv217_retrained_acc_80.510mobilenetv217_quantized_acc_80.180_config_vgg16_threshold.pt")
 
 
-    for name, weight in model.named_parameters():
-        if (len(weight.size()) == 4):
-            print(name, weight)
-    print("\n------------------------------\n")
+    # for name, weight in model.named_parameters():
+    #     if (len(weight.size()) == 4):
+    #         print(name, weight)
+    # print("\n------------------------------\n")
 
     test(model, device, test_loader)
     test_irregular_sparsity(model)
