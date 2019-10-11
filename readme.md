@@ -59,6 +59,8 @@ python testers.py
 ```
 We can see that the total number of parameters is XXX. Among them, there are XXXX zero parameters and XXXX non-zero parameters. 
 
+Considering the quantization, the total number of parameters (counted with 32bit base) is XXXX.
+
 Parameter number: XXXXX
 
 # Count operations
@@ -80,7 +82,9 @@ It shows that the there are 77.84M multiplications and 153.41 additions in the c
 
 So in the case of no sparsity, the total number of operations is 231.25M (77.84M+153.41M). If we consider the sparsity and set it to non-zero value, the number of operations will continue to reduce. But since the sparsity for each layer is not the same, it is hard to use one number to represent the sparsity of all layers. We would work on that if time permits. But if we do not have enough time, we think that setting the sparsity parameter to 0.5 during should be an appropriate choice, considering the overall sparsity for the whole model is about 80%. By setting the sparsity parameter to 0.5, there are 39.49M multiplications and 76.7M additions according to the outputs of the check_model_operations.py file. The total operation number is 116.19M. This real operation number should be smaller than this, because most of the layers have a sparsity larger than 0.5 and the overall sparsity of the whole model is about 0.8. But we think we can use this operation number in scoring.
 
-operation number: 116.19M
+Considering the quantization, the total number of operations (counted with 32bit base) is XXXX.
+
+operation number: XXX
 
 # Score 
 
