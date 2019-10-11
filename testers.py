@@ -96,7 +96,7 @@ def test_irregular_sparsity(model):
         (total_zeros+total_nonzeros) / 32))
     print("batchnorm parameters number is: {}".format(bn_paras))
     print("total non-zero parameters is: {}".format(bn_paras + total_nonzeros))
-    print("total parameters for storage is: {}".format((bn_paras + total_nonzeros)/2 + (total_zeros+total_nonzeros) / 32))
+    print("total parameters for storage is: {}".format((bn_paras + total_nonzeros)/4 + (total_zeros+total_nonzeros) / 32))
     print("===========================================================================\n\n")
 
 
