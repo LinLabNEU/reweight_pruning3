@@ -53,11 +53,13 @@ It outputs the test accuracy of the model. It also counts the number of non-zero
 
 # Count operations
 
+We show how we count the operations and the operation number for scoring in the end of this part. 
+
 We tried two ways to count the operations. One way is to use the open-source pytorch-opcounter tool. It will count the number of operations during inference. To use this tool and check the performance,
 ```
 python XXXXX
 ```
-It shows that the total number of operations is 325.4M. As it counts the real operations during runtime, and for unquantized models, multiplication are counted as 16bit while the operation counting is based on 32bit, we believe the operation number for scoring should be smaller than the value 325.4M. This number can work as a reference. 
+It shows that the total number of operations is 325.4M. It counts the real operations during runtime and does not consider the sparsity since zero parameters still participate in the operations. Besides, for unquantized models, multiplication are counted as 16bit while the operation counting is based on 32bit, we believe the operation number for scoring should be smaller than the value 325.4M. We do not use this number for scoring and this number can work as a reference. 
 
 We would like to use the second method to count the number of operations. It is based on the counting example from the MicroNet challenge group. ( https://github.com/google-research/google-research/blob/master/micronet_challenge/ )
 The original version is for the efficientnet on tensorflow. We made necessary modifications to work for the our mobilenet_v2 model on pytorch. To run the counting,
@@ -66,7 +68,9 @@ python check_model_operations.py
 ```
 It shows that the there are 77.84M multiplications and 153.41 additions in the case of no sparsity (setting the sparsity to 0 when print_summary). Since the multiplication is performed as 16bit and counted as 32bit, the actual number of multiplication should be 155.68M and the total number of operations is 309M, which is close to and no larger the 325.4M results in the first counting method with the tool.
 
-So in the case of no sparsity, the total number of operations is 231.25M (77.84M+153.41M). If we consider the sparsity and set it to non-zero value, the number of operations will continue to reduce. But since the sparsity for each layer is not the same, it is hard to use one number to represent the sparsity of all layers. We would work on that if time permits. But if we do not have enough time, we think that we can use the number 231.25M to compute the score, although the real value should be smaller. 
+So in the case of no sparsity, the total number of operations is 231.25M (77.84M+153.41M). If we consider the sparsity and set it to non-zero value, the number of operations will continue to reduce. But since the sparsity for each layer is not the same, it is hard to use one number to represent the sparsity of all layers. We would work on that if time permits. But if we do not have enough time, we think that setting the sparsity parameter to 0.5 during should be an appropriate choice, considering the overall sparsity for the whole model is about 80%. By setting the sparsity parameter to 0.5, there are 39.49M multiplications and 76.7M additions according to the outputs of the check_model_operations.py file. The total operation number is 116.19M. This real operation number should be smaller than this, because most of the layers have a sparsity larger than 0.5 and the overall sparsity of the whole model is about 0.8. But we think we can use this operation number in scoring.
+
+operation number: 116.19M
 
 # Score 
 
