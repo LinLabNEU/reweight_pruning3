@@ -147,7 +147,7 @@ def dataParallel_converter(model, model_path):
 def main():
 
     model = MobileNetV2()
-    model = dataParallel_converter(model, "./cifar100_mobilenetv217_retrained_acc_80.170_config_mobile_v2_0.7_threshold.pt")
+    model = dataParallel_converter(model, "./cifar100_mobilenetv217_retrained_acc_80.510mobilenetv217_quantized_acc_80.180_config_vgg16_threshold.pt")
 
 
     for name, weight in model.named_parameters():
