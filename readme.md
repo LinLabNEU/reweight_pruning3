@@ -6,14 +6,12 @@ This project is based on Pytorch. We perform quantization for this model. We fir
 
 # Model
 
-The model architecture is based on the MobileNet V2. For more details, please refer to the mobilenet_v2.py file and the original paper. The pruned model is saved as cifar100_mobilenetv2.pt. It can achieve 80.15% accuracy satisfying the 80% accuracy requirement.
+The model architecture is based on the MobileNet V2. For more details, please refer to the mobilenet_v2.py file and the original paper. The pruned model is saved as cifar100_mobilenetv2.pt. It can achieve 80.01% accuracy satisfying the 80% accuracy requirement.
 
-
-total weights: 3905632, total number of zeros: 3012168, non-zeros: 893464, zero sparsity is: 0.7712\
 
 # Pruning method
 
-We use reweighted L1 pruning method to prune the model. The detailed method is shown in XXX. The code for the pruning is in the training directory. Basically, starting from a pretrained unpruned model which achieves 81.92% accuracy on CIFAR-100, we first try to decrease the L1 norm of this model with the reweighted L1 pruning method to make model sparse. Then we set the parameters under a threshold to zero (obtain the sparsity mask) and retrain the model. Note that during retraining, the zero parameters are not updated.
+We use reweighted L1 pruning method to prune the model. The detailed method is shown in training/reweighted_l1_prune.pdf. The code for the pruning is in the training directory. Basically, starting from a pretrained unpruned model which achieves 81.92% accuracy on CIFAR-100, we first try to decrease the L1 norm of this model with the reweighted L1 pruning method to make model sparse. Then we set the parameters under a threshold to zero (obtain the sparsity mask) and retrain the model. Note that during retraining, the zero parameters are not updated.
 
 To run the pruning:
 
@@ -39,7 +37,7 @@ To load and verify the model, run:
 ```
 python testers.py
 ```
-It outputs the test accuracy of the model. It also counts the number of non-zero and zero elements in the parameters. The total number of parameters is 3996704. Among them, there are 3012168 zero parameters and 984536 non-zero parameters. 
+It outputs the test accuracy of the model. It also counts the number of non-zero and zero elements in the parameters. The total number of parameters is 3996704 (4.0M). Among them, there are 3012168 (3.02M) zero parameters and 984536 (0.98M) non-zero parameters. The number of bitmask is 122051 (0.1221M). So the total parameters for storage is 0.3671M (0.98M / 4 + 0.1221M) since the parameters are all 8bit.
 
 # Count parameters
 
