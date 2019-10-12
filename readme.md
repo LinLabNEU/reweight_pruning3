@@ -27,8 +27,9 @@ or refer to the training/run.sh file.
 
 All layers of this current model are 8 bits. To run the quantization,
 ```
-python quantization/main.py
+python ./quantization/main.py
 ```
+or refer to the ./quantization/quantization.sh
 
 1. All the multiplication in the quantized MobileNet2 is not overflow. Since for a convolution operation, element-wise multiplication is performed firstly, and each element in the kernel and each element in the input are quantized into Qbits, for example 8bits, then each multiplication in the convolution is just Qbits-multiplication, the product is 2Q-bits which leads to accumulation will be at least 2Q-bits without rounding the product back into 8bits. Therefore without rounding in the convolution, addition taking 2Q-bits product in the convolution will be overflow. And half of the addition is just 2Q-bits, the 25% addition will be (2Q+1) bits, the 12.25% will be (2Q+2) bits. This is a so-called "binary-tree" accumulation. 
 
