@@ -47,7 +47,7 @@ python testers.py
 ```
 It outputs the test accuracy of the model. It also counts the number of non-zero and zero elements in the parameters. The total number of parameters is 3996704 (4.0M). Among them, there are 3012168 (3.02M) zero parameters and 984536 (0.98M) non-zero parameters. The number of bitmask is 122051 (0.1221M). So the total parameters for storage is 0.3671M (0.98M / 4 + 0.1221M) since the parameters are all 8bit.
 
-Parameter number: 0.3671M
+- Parameter number: 0.3671M
 
 # Count operations
 
@@ -74,7 +74,7 @@ We perform quantization for this model and all of the layers are quantized to 8b
 For the addition, 50% are 16bits, 25% are 17bits, 12.5% are 18bits, 6.25% are 19bits, 3.125% are 20bits and so on. For the simpliclity, we set the rest 3.125% addition to 32bits. So the total number of addition is 41.5M
 (76.7M * (0.5 * 16 + 0.25 * 17 + 0.125 * 18 + 0.0625 * 19 + 0.03125 * 20+0.03125 * 32) / 32). So the total number of operations for scoring is 61.25M (19.75M + 41.5M).
 
-operation number: 61.25M
+- Operation number: 61.25M
 
 # Score 
 
