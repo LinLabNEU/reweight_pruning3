@@ -88,6 +88,6 @@ So the score is 0.3671M / 36.5M + 61.25M / 10.49B = 0.0159.
 The team name is XXXX.
 
 This is an collaboration of Northeastern University, XXX university and IBM corporation. The team members are listed as follows, 
--XXXX
--XXXX
--XXXX
+- XXXX
+- XXXX
+- XXXX
