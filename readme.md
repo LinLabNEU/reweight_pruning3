@@ -6,7 +6,7 @@ This project is based on Pytorch. We perform quantization for this model. We fir
 
 # Model
 
-The model architecture is based on the MobileNet V2. For more details, please refer to the mobilenet_v2.py file and the original paper. The pruned model is saved as cifar100_mobilenetv2.pt. It can achieve 80.01% accuracy satisfying the 80% accuracy requirement.
+The model architecture is based on the MobileNet V2. For more details, please refer to the mobilenet_v2_cifar100_exp_30.py file and the original paper. The pruned model is saved as cifar100_mobilenetv2.pt. It can achieve 80.01% accuracy satisfying the 80% accuracy requirement.
 
 
 # Pruning method
