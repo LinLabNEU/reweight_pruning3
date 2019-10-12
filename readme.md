@@ -48,7 +48,7 @@ From the output of the testers file, that is,
 ```
 python testers.py
 ```
-It outputs the test accuracy of the model. It also counts the number of non-zero and zero elements in the parameters. The total number of parameters is 3996704 (4.0M). Among them, there are 3012168 (3.02M) zero parameters and 984536 (0.98M) non-zero parameters. The number of bitmask is 122051 (0.1221M). So the total parameters for storage is 0.3671M (0.98M / 4 + 0.1221M) since the parameters are all 8bit.
+It outputs the test accuracy of the model. It also counts the number of non-zero and zero elements in the parameters. The total number of parameters is 3996704 (4.0M). Among them, there are 3012168 (3.02M) zero parameters and 984536 (0.98M) non-zero parameters. The number of bitmask is 122051 (0.1221M). So the total parameters for storage is 0.3671M (0.98M * 8 / 32 + 0.1221M) since the parameters are all 8bit.
 
 - Parameter number: 0.3671M
 
