@@ -820,53 +820,13 @@ def getLayerSize(model):
             LayerSize=LayerSize+1
     return LayerSize
 
-def setQBN1(size, bias):
-    print(size)
-    QBNs=list()
-    for i in range(size):
-        QBNs.append(args.param_bits)
-    QBNs[0]=QBNs[0]+bias
-    #QBNs[1]=QBNs[1]+b
-    #QBNs[2]=QBNs[2]-2*bias
-    #QBNs[3]=QBNs[3]-bias
-    #QBNs[5]=QBNs[5]-2*bias
-    QBNs[28]=QBNs[28]-2*bias
-    QBNs[20]=QBNs[20]-2*bias
-    QBNs[21]=QBNs[21]-2*bias
-    QBNs[24]=QBNs[24]-2*bias
-    QBNs[26]=QBNs[26]-2*bias
-    QBNs[29]=QBNs[29]-2*bias
-    QBNs[33]=QBNs[33]-2*bias
-    QBNs[size-3]=QBNs[size-3]-bias
-    #QBNs[size-1]=QBNs[size-1]+bias+1
-    return QBNs
 
 def setQBN(size, bias):
     print(size)
     QBNs=list()
     for i in range(size):
         QBNs.append(args.param_bits)
-    QBNs[0]=QBNs[0]+bias
-    #QBNs[1]=QBNs[1]+b
-    #QBNs[2]=QBNs[2]-2*bias
-    #QBNs[3]=QBNs[3]-bias
-    #QBNs[5]=QBNs[5]-2*bias
-    QBNs[28]=QBNs[28]-2*bias
-    #QBNs[20]=QBNs[20]-2*bias
-    QBNs[21]=QBNs[21]-2*bias
-    QBNs[24]=QBNs[24]-2*bias
-    QBNs[26]=QBNs[26]-2*bias
-
-    QBNs[38]=QBNs[38]-2*bias
-    QBNs[30]=QBNs[30]-2*bias
-    QBNs[31]=QBNs[31]-2*bias
-    QBNs[34]=QBNs[34]-2*bias
-    QBNs[36]=QBNs[36]-2*bias
-    QBNs[39]=QBNs[39]-2*bias
-    QBNs[43]=QBNs[43]-2*bias
-    QBNs[size-3]=QBNs[size-3]-2*bias
-    QBNs[size-1]=QBNs[size-1]-2*bias
-    #QBNs[size-1]=QBNs[size-1]+bias+1
+    #QBNs[0]=QBNs[0]+bias
     return QBNs
 
 def q_main_layerwise():
