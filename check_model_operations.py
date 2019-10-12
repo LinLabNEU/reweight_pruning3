@@ -233,7 +233,7 @@ def read_model(model, input_shape, f_activation='relu'):
 def main():
  #   model = VGG(depth=16, init_weights=True, cfg=None)
     model = MobileNetV2()
-    model = dataParallel_converter(model, "./model_retrained/cifar10_mobilenetv217_retrained_acc_79.510_config_mobile_v2_0.7_threshold.pt")
+    model = dataParallel_converter(model, "./cifar100_mobilenetv217_retrained_acc_80.510mobilenetv217_quantized_acc_80.180_config_vgg16_threshold.pt")
 
 
     aa = getattr(model, 'conv1')
@@ -248,14 +248,14 @@ def main():
     counter = counting.MicroNetCounter(all_ops, add_bits_base=32, mul_bits_base=32)
 
 
-    INPUT_BITS = 16
+    INPUT_BITS = 32
     ACCUMULATOR_BITS = 32
-    PARAMETER_BITS = 16
+    PARAMETER_BITS = 32
     SUMMARIZE_BLOCKS = True
 
     counter.print_summary(0, PARAMETER_BITS, ACCUMULATOR_BITS, INPUT_BITS, summarize_blocks=SUMMARIZE_BLOCKS)
-
-
+    
+    counter.print_summary(0.5, PARAMETER_BITS, ACCUMULATOR_BITS, INPUT_BITS, summarize_blocks=SUMMARIZE_BLOCKS)
 
 
 if __name__ == '__main__':
