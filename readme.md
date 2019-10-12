@@ -171,7 +171,7 @@ This is an collaboration of Northeastern University, Indiana University and IBM 
 - Indiana University
   - Qian Lou
   - Lei Jiang
-- IBM
+- MIT-IBM Watson AI Lab, IBM Research
   - Gaoyuan Zhang
   - Sijia Liu
 
