@@ -344,6 +344,7 @@ def masked_retrain(criterion, optimizer, scheduler):
     #test_column_sparsity(model)
     #test_filter_sparsity(model)
     test_irregular_sparsity(model)
+    
     print("Best Acc: {:.4f}%".format(max(best_prec1)))
     np.save(strftime("./plotable/%m-%d-%Y-%H:%M_plotable_{}.npy".format(args.sparsity_type)), epoch_loss_dict)
     np.save(strftime("./plotable/%m-%d-%Y-%H:%M_testAcc_{}.npy".format(args.sparsity_type)), testAcc)
